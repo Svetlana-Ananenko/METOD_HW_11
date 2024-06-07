@@ -1,6 +1,4 @@
 public class Main {
-
-
     public static void taskOne() {
         System.out.println(" \n  Задача №1 ");
     }
@@ -14,121 +12,75 @@ public class Main {
     }
 
     /////////////////////////////////////////////////////////////////////////
-
-    public static void notLeapYear() {
-        System.out.print(" - Год НЕ является високосным ");
+    public static int isLeapYear(int year) {
+        boolean leapYearOn = (year % 4 == 0) && (year % 100 != 0);
+        if (year % 4 == 0 || year % 400 == 0) {
+            System.out.print(year + " - високосный год ");
+        } else if (year % 100 == 0) {
+            System.out.print(year + " - не високосный год ");
+        } else {
+            System.out.print(year + " - не високосный год ");
+        }
+        return year;
     }
-
-    public static void isLeapYear() {
-        System.out.println(" - Год является високосным ");
-
-
-    }
-
 
     /////////////////////////////////////////////////////////////////////////
-
-    public static void checkReleaseYear() {
-        System.out.println("Установите облегченную версию приложения для Android по ссылке");
-
-    }
-
-
-    public static void checkSystemTelephone() {
-        System.out.print("Установите версию приложения для Android по ссылке");
-
-    }
-
-    public static void checkReleaseYear2() {
-        System.out.print("Установите облегченную версию приложения для iOS по ссылке");
-
-    }
-
-    public static void checkSystemTelephone2() {
-        System.out.print("Установите версию приложения для iOS по ссылке");
-
+    public static int isReleaseYearValid(int year, int os) {
+        switch (os) {
+            case 0:
+                if (year <= 2015) {
+                    System.out.print("Установите облегченную версию приложения для iOS по ссылке");
+                    break;
+                } else {
+                    System.out.print("Установите версию приложения для iOS по ссылке");
+                    break;
+                }
+            case 1:
+                if (year <= 2015) {
+                    System.out.println("Установите облегченную версию приложения для Android по ссылке");
+                    break;
+                } else {
+                    System.out.print("Установите версию приложения для Android по ссылке");
+                    break;
+                }
+        }
+        return year;
     }
 
     //////////////////////////////////////////////////////////////////////////
+    public static int calculateDeliveryDays(int distance, int day) {
+        boolean EstimatedDeliveryTime = (distance >= 0) && (distance < 20);
+        if (EstimatedDeliveryTime) {
+            System.out.printf("Потребуется дней: %s %n", day);
+        } else if (distance >= 20 && (distance < 60)) {
+            System.out.printf("Потребуется дней: %s %n", day += 1);
+        } else if (distance >= 60 && (distance < 100)) {
+            System.out.printf("Потребуется дней: %s %n", day += 2);
+        } else {
+            System.out.println("Доставка не осущетсвляется");
+        }
 
-    public static int calculateDeliveryDays(int day) {
-        System.out.printf("Для доставки потребуется дней: %s %n", day);
         return day;
     }
-
-
-    public static int calculateDeliveryDays2(int day) {
-        System.out.printf("Для доставки потребуется дней: %s %n", day += 1);
-        return day;
-    }
-
-    public static int calculateDeliveryDays3(int day) {
-        System.out.printf("Для доставки потребуется дней: %s %n", day += 2);
-        return day;
-    }
-
-    public static void calculateDeliveryDays4() {
-        System.out.println("Доставка не осущетсвляется");
-
-    }
-
-
     /////////////////////////////////////////////////////////////////////////
 
 
     public static void main(String[] args) {
         taskOne();
         int year = 2024;
-        int leapYearNot = year % 100;
-        boolean leapYearOn = (year % 4 == 0) && (year % 100 != 0);
-        if (year % 4 == 0 || year % 400 == 0) {
-            System.out.print(year);
-            isLeapYear();
-        } else if (leapYearNot == 0) {
-            System.out.print(year);
-            notLeapYear();
-        } else {
-            System.out.print(year);
-            notLeapYear();
-        }
+        isLeapYear(year);
 
 
         taskTwo();
         int clientOS2 = 1;
         int clientDeviceYear = 2015;
-        switch (clientOS2) {
-            case 0:
-                if (clientDeviceYear <= 2015) {
-                    checkReleaseYear2();
-                    break;
-                } else {
-                    checkSystemTelephone2();
-                    break;
-                }
-            case 1:
-                if (clientDeviceYear <= 2015) {
-                    checkReleaseYear();
-                    break;
-                } else {
-                    checkSystemTelephone();
-                    break;
-                }
-        }
+        isReleaseYearValid(clientDeviceYear, clientOS2);
 
 
         taskThree();
-
         int deliveryDistance = 95;
         int term = 1;
-        boolean EstimatedDeliveryTime = (deliveryDistance >= 0) && (deliveryDistance < 20);
-        if (EstimatedDeliveryTime) {
-            calculateDeliveryDays(term);
-        } else if (deliveryDistance >= 20 && (deliveryDistance < 60)) {
-            calculateDeliveryDays2(term);
-        } else if (deliveryDistance >= 60 && (deliveryDistance < 100)) {
-            calculateDeliveryDays3(term);
-        } else {
-            calculateDeliveryDays4();
-        }
+        calculateDeliveryDays(deliveryDistance, term);
+
     }
 }
